@@ -7,13 +7,6 @@ export interface ToDoItem extends NewToDoItem {
   completed: boolean,
 }
 
-interface FakeResponse<T extends unknown> {
-  status: number,
-  message: string,
-  data?: T,
-  ok: boolean,
-}
-
 const ToDoItems: Record<number, ToDoItem> = {
   1: { id: 1, description: 'Buy milk', completed: true },
   2: { id: 2, description: 'Pick up dog from daycare', completed: true },
@@ -23,13 +16,6 @@ const ToDoItems: Record<number, ToDoItem> = {
   6: { id: 6, description: `Book flights for cousin's wedding`, completed: false },
 }
 
-function copy<T extends unknown>(data: T): T {
-  return JSON.parse(JSON.stringify(data))
-}
-
-function wait(timeout: number): Promise<any> {
-  return new Promise(resolve => setTimeout(resolve, timeout))
-}
 
 export default {
   getList: (): ToDoItem[] => {

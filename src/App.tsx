@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { SyntheticEvent, useEffect, useState } from "react";
 
-import api, { ToDoItem } from "./api";
+import api, { ToDoItem } from "./api/orm";
 
 function App() {
   const [toDoItems, setToDoItems] = useState<ToDoItem[]>([]);

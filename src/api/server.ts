@@ -2,22 +2,15 @@ import express from "express";
 import cors from 'cors';
 import bodyParser from 'body-parser'
 
-import api from "./index";
+import orm from "./orm";
 
-import { ToDoItem, NewToDoItem } from "../types/ToDoItem";
+import { ToDoItem } from "../types/ToDoItem";
 
 const app = express();
 const port = 3001;
 
 app.use(cors())
 app.use(bodyParser.json())
-
-interface FakeResponse<T extends unknown> {
-  status: number;
-  message: string;
-  data?: T;
-  ok: boolean;
-}
 
 function wait(timeout: number): Promise<any> {
     return new Promise(resolve => setTimeout(resolve, timeout))
@@ -46,25 +39,25 @@ const ToDoItems: Record<number, ToDoItem> = {
 
 app.get("/items", async (req, res) => {
   await wait(Math.random() * 250 + 50)
-  res.send(api.getList())
+  res.send(orm.getList())
 });
 
 app.delete("/items/:id", async (req, res) => {
   await wait(Math.random() * 250 + 50)
-  api.deleteItem(Number(req.params.id))
+  orm.deleteItem(Number(req.params.id))
   res.send()
 });
 
 app.post("/items", async (req, res) => {
   await wait(Math.random() * 250 + 50)
   console.log(req.body)
-  const item = api.addItem(req.body)
+  const item = orm.addItem(req.body)
   res.send(item)
 });
 
 app.put("/items/:id/toggle", async (req, res) => {
   await wait(Math.random() * 250 + 50)
-  api.toggleItem(Number(req.params.id))
+  orm.toggleItem(Number(req.params.id))
   res.send()
 });
 

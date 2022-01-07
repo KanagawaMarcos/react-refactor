@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "server-start": "ts-node ./src/api/server.ts",
-    "dev": "server-start & vite",
+    "client-start": "vite",
+    "dev": "concurrently 'yarn server-start' 'yarn client-start'",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
