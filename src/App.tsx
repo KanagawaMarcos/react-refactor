@@ -24,7 +24,8 @@ function App() {
 
   useEffect(() => {
     async function getItems() {
-      const { data } = await api.getList();
+      const res = await fetch('http://localhost:3001/items')
+      const data = await res.json()
       if (data) setToDoItems(data);
     }
     getItems();
@@ -32,32 +33,41 @@ function App() {
 
   function handleSubmitNewItem(event: SyntheticEvent): void {
     event.preventDefault();
-    api.addItem({ description: newItemDescription }).then(({ data }) => {
+    async function createItem() {
+      const response = await fetch('http://localhost:3001/items', { method: 'post',     headers: {
+        'Content-Type': 'application/json'
+      },body: JSON.stringify({ description: newItemDescription }) })
+      const data = await response.json()
       if (data) {
         setToDoItems(prev => [...prev, data])
         setNewItemDescription('')
       }
-    })
+    }
+
+    createItem()
   }
 
   function handleDeleteItem(id: number, index: number): void {
-    api.deleteItem(id).then(response => {
-      if (response.ok) {
-        setToDoItems(prev => [...prev.slice(0, index), ...prev.slice(index + 1)])
-      }
-    })
+    async function deleteItem() {
+      const response = await fetch(`http://localhost:3001/items/${id}`, {
+        method: "DELETE",
+      })
+      setToDoItems(prev => [...prev.slice(0, index), ...prev.slice(index + 1)])
+    }
+
+    deleteItem()
   }
 
   function handleToggleItem(id: number, index: number): void {
-    api.toggleItem(id).then(response => {
-      if (response.ok) {
-        setToDoItems(prev => [
-          ...prev.slice(0, index),
-          { ...prev[index], completed: !prev[index].completed},
-          ...prev.slice(index + 1)
-        ])
-      }
-    })
+    async function toggleItem() {
+      const response = await fetch(`http://localhost:3001/items/${id}/toggle`, { method: "PUT" })
+      setToDoItems(prev => [
+        ...prev.slice(0, index),
+        { ...prev[index], completed: !prev[index].completed},
+        ...prev.slice(index + 1)
+      ])
+    }
+    toggleItem()
   }
 
   return (

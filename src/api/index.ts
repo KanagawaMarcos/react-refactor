@@ -32,31 +32,27 @@ function wait(timeout: number): Promise<any> {
 }
 
 export default {
-  getList: async (): Promise<FakeResponse<ToDoItem[]>> => {
-    await wait(Math.floor(Math.random() * 500 + 50))
-    return Promise.resolve(copy({ status: 200, message: 'Ok', data: Object.values(ToDoItems), ok: true }))
+  getList: (): ToDoItem[] => {
+    return Object.values(ToDoItems)
   },
-  deleteItem: async (id: number): Promise<FakeResponse<void>> => {
-    await wait(Math.floor(Math.random() * 500 + 50))
-    if (!ToDoItems[id]) return Promise.reject(({ status: 400, message: 'Not found', ok: false }))
+  deleteItem: (id: number): null => {
+    if (!ToDoItems[id]) throw new Error('Not found')
     delete ToDoItems[id]
-    return Promise.resolve({ status: 204, message: 'No content', ok: true })
+    return null
   },
-  addItem: async (item: NewToDoItem): Promise<FakeResponse<ToDoItem>> => {
-    await wait(Math.floor(Math.random() * 500 + 50))
+  addItem: (item: NewToDoItem): ToDoItem => {
     const id = Math.max(...Object.keys(ToDoItems).map(Number)) + 1
     if (typeof item.description !== 'string') {
-      return Promise.reject({ status: 422, message: 'Unprocessable entity' })
+      throw new Error('Unprocessable entity')
     }
     const newItem = { id, ...item, completed: false }
     ToDoItems[id] = newItem
-    return Promise.resolve(copy({ status: 200, message: 'Ok', data: newItem, ok: true }))
+    return newItem
   },
-  toggleItem: async (id: number): Promise<FakeResponse<void>> => {
-    await wait(Math.floor(Math.random() * 500 + 50))
+  toggleItem: (id: number): null => {
     const item = ToDoItems[id]
-    if (!item) return Promise.reject({ status: 400, message: 'Not found', ok: false })
+    if (!item) throw new Error('Not found')
     item.completed = !item.completed
-    return Promise.resolve({ status: 200, message: 'No content', ok: true })
+    return null
   },
 }
