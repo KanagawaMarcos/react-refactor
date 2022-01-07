@@ -16,7 +16,8 @@ import {
 } from "@chakra-ui/react";
 import { SyntheticEvent, useEffect, useState } from "react";
 
-import api, { ToDoItem } from "./api/orm";
+import { ToDoItem } from "./api/orm";
+// import Table from './Table'
 
 function App() {
   const [toDoItems, setToDoItems] = useState<ToDoItem[]>([]);
@@ -24,8 +25,8 @@ function App() {
 
   useEffect(() => {
     async function getItems() {
-      const res = await fetch('http://localhost:3001/items')
-      const data = await res.json()
+      const res = await fetch("http://localhost:3001/items");
+      const data = await res.json();
       if (data) setToDoItems(data);
     }
     getItems();
@@ -34,52 +35,77 @@ function App() {
   function handleSubmitNewItem(event: SyntheticEvent): void {
     event.preventDefault();
     async function createItem() {
-      const response = await fetch('http://localhost:3001/items', { method: 'post',     headers: {
-        'Content-Type': 'application/json'
-      },body: JSON.stringify({ description: newItemDescription }) })
-      const data = await response.json()
+      const response = await fetch("http://localhost:3001/items", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ description: newItemDescription }),
+      });
+      const data = await response.json();
       if (data) {
-        setToDoItems(prev => [...prev, data])
-        setNewItemDescription('')
+        setToDoItems((prev) => [...prev, data]);
+        setNewItemDescription("");
       }
     }
 
-    createItem()
+    createItem();
   }
 
   function handleDeleteItem(id: number, index: number): void {
     async function deleteItem() {
       const response = await fetch(`http://localhost:3001/items/${id}`, {
         method: "DELETE",
-      })
-      setToDoItems(prev => [...prev.slice(0, index), ...prev.slice(index + 1)])
+      });
+      setToDoItems((prev) => [
+        ...prev.slice(0, index),
+        ...prev.slice(index + 1),
+      ]);
     }
 
-    deleteItem()
+    deleteItem();
   }
 
   function handleToggleItem(id: number, index: number): void {
     async function toggleItem() {
-      const response = await fetch(`http://localhost:3001/items/${id}/toggle`, { method: "PUT" })
-      setToDoItems(prev => [
+      const response = await fetch(`http://localhost:3001/items/${id}/toggle`, {
+        method: "PUT",
+      });
+      setToDoItems((prev) => [
         ...prev.slice(0, index),
-        { ...prev[index], completed: !prev[index].completed},
-        ...prev.slice(index + 1)
-      ])
+        { ...prev[index], completed: !prev[index].completed },
+        ...prev.slice(index + 1),
+      ]);
     }
-    toggleItem()
+    toggleItem();
   }
 
   return (
     <>
       <Center>
-        <Box p={4} width="500px">
+        <Box p={4} width="640px">
           <Heading>To-Do List</Heading>
         </Box>
       </Center>
       <Center>
-        <Box p={4} width="500px">
+        <Box width="640px">
           <List>
+            <ListItem>
+              <Flex
+                p={2}
+                alignItems="center"
+                bg="green.500"
+                color="white"
+                fontWeight={600}
+              >
+                <Text fontSize="sm" width="50px">
+                  Done
+                </Text>
+                <Text fontSize="sm">Description</Text>
+                <Spacer />
+                <Text fontSize="sm">Delete</Text>
+              </Flex>
+            </ListItem>
             {toDoItems.map((item, index) => (
               <ListItem key={item.id}>
                 <Flex
@@ -89,8 +115,8 @@ function App() {
                 >
                   <Checkbox
                     isChecked={item.completed}
-                    marginRight={2}
                     onChange={() => handleToggleItem(item.id, index)}
+                    width="50px"
                   />
                   <Text fontSize="lg">{item.description}</Text>
                   <Spacer />
@@ -106,7 +132,7 @@ function App() {
         </Box>
       </Center>
       <Center>
-        <Box p={4} width="500px">
+        <Box p={4} width="640px" bg="gray.50">
           <form onSubmit={handleSubmitNewItem}>
             <Flex>
               <FormControl>
