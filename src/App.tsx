@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { SyntheticEvent, useEffect, useState } from "react";
 
-import { ToDoItem } from "./api/orm";
+import { ToDoItem } from "./types/ToDoItem";
 // import Table from './Table'
 
 function App() {

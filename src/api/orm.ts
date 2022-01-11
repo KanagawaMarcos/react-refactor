@@ -1,11 +1,4 @@
-export interface NewToDoItem {
-  description: string,
-}
-
-export interface ToDoItem extends NewToDoItem {
-  id: number,
-  completed: boolean,
-}
+import { NewToDoItem, ToDoItem } from '../types/ToDoItem';
 
 const ToDoItems: Record<number, ToDoItem> = {
   1: { id: 1, description: 'Buy milk', completed: true },
