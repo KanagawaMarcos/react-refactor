@@ -17,7 +17,7 @@ import {
 import { SyntheticEvent, useEffect, useState } from "react";
 
 import { ToDoItem } from "./types/ToDoItem";
-// import Table from './Table'
+import Table from "./Table";
 
 function App() {
   const [toDoItems, setToDoItems] = useState<ToDoItem[]>([]);
@@ -87,50 +87,73 @@ function App() {
           <Heading>To-Do List</Heading>
         </Box>
       </Center>
-      <Center>
+
+      <Center alignItems="baseline">
         <Box width="640px">
           <List>
             <ListItem>
-              <Flex
-                p={2}
-                alignItems="center"
-                bg="green.500"
-                color="white"
-                fontWeight={600}
-              >
-                <Text fontSize="sm" width="50px">
+              <Flex alignItems="center" color="gray.600" fontWeight={600}>
+                <Text
+                  fontSize={12}
+                  px={6}
+                  py={3}
+                  textTransform="uppercase"
+                  width={100}
+                >
                   Done
                 </Text>
-                <Text fontSize="sm">Description</Text>
-                <Spacer />
-                <Text fontSize="sm">Delete</Text>
+                <Text fontSize={12} px={6} py={3} textTransform="uppercase">
+                  Description
+                </Text>
+                <Text
+                  fontSize={12}
+                  px={6}
+                  py={3}
+                  textTransform="uppercase"
+                ></Text>
               </Flex>
             </ListItem>
             {toDoItems.map((item, index) => (
               <ListItem key={item.id}>
                 <Flex
-                  p={2}
                   alignItems="center"
-                  bg={index % 2 === 0 ? "green.50" : "green.100"}
+                  bg={index % 2 === 0 ? "gray.100" : "white"}
                 >
                   <Checkbox
                     isChecked={item.completed}
                     onChange={() => handleToggleItem(item.id, index)}
-                    width="50px"
+                    width={100}
+                    px={6}
+                    py={4}
                   />
-                  <Text fontSize="lg">{item.description}</Text>
+                  <Text fontSize={16} px={6} py={4}>
+                    {item.description}
+                  </Text>
                   <Spacer />
-                  <IconButton
-                    icon={<DeleteIcon />}
-                    aria-label="Delete this item"
-                    onClick={() => handleDeleteItem(item.id, index)}
-                  />
+                  <Box px={6} py={4}>
+                    <IconButton
+                      icon={<DeleteIcon />}
+                      aria-label="Delete this item"
+                      onClick={() => handleDeleteItem(item.id, index)}
+                      size="xs"
+                      background="gray.600"
+                      _hover={{ bg: "red.600" }}
+                      color="white"
+                    />
+                  </Box>
                 </Flex>
               </ListItem>
             ))}
           </List>
         </Box>
       </Center>
+
+      {/* <Center>
+        <Box width="640px">
+          <Table />
+        </Box>
+      </Center> */}
+
       <Center>
         <Box p={4} width="640px" bg="gray.50">
           <form onSubmit={handleSubmitNewItem}>

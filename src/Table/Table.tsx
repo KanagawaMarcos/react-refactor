@@ -16,7 +16,11 @@ import React from "react";
 export function Table(): React.ReactElement {
   return (
     <CTable variant="striped">
-      {/* <Tfoot>
+      <Thead>
+      </Thead>
+      <Tbody>
+      </Tbody>
+      <Tfoot>
         <Tr>
           <Td colSpan={3}>
             <Flex justifyContent="center">
@@ -33,7 +37,7 @@ export function Table(): React.ReactElement {
             </Flex>
           </Td>
         </Tr>
-      </Tfoot> */}
+      </Tfoot>
     </CTable>
   );
 }
