@@ -32,3 +32,4 @@ Note: It is not expected that you complete all three functions by the end of the
 
 - At work, you have the ability to use the entire internet to solve problems. You may use whatever you need during this exercise to aid your work.
 - Focus on the functionality of your table, not styling.
+- An additional model `User` is included. While you do not have to create the table for this, it is provided to give extra context into what we'd like for the `Table` component to do.
