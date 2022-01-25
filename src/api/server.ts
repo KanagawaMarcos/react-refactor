@@ -42,6 +42,11 @@ app.get("/items", async (req, res) => {
   res.send(orm.getList())
 });
 
+app.get("/users", async (req, res) => {
+  await wait(Math.random() * 250 + 50)
+  res.send(orm.getUsers())
+});
+
 app.delete("/items/:id", async (req, res) => {
   await wait(Math.random() * 250 + 50)
   orm.deleteItem(Number(req.params.id))

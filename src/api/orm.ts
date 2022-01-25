@@ -1,4 +1,5 @@
 import { NewToDoItem, ToDoItem } from '../types/ToDoItem';
+import { User } from '../types/User';
 
 const ToDoItems: Record<number, ToDoItem> = {
   1: { id: 1, description: 'Buy milk', completed: true },
@@ -8,6 +9,13 @@ const ToDoItems: Record<number, ToDoItem> = {
   5: { id: 5, description: 'Watch the season finale of Silicon Valley', completed: false },
   6: { id: 6, description: `Book flights for cousin's wedding`, completed: false },
 }
+
+const users: User[] = [
+  { id: 327, email: 'lisa@blackpink.co.kr', avatarUrl: '/lisa.jfif', username: 'lisa' },
+  { id: 103, email: 'jisoo@blackpink.co.kr', avatarUrl: '/jisoo.jfif', username: 'jisoo' },
+  { id: 211, email: 'rose@blackpink.co.kr', avatarUrl: '/rose.jfif', username: 'rose' },
+  { id: 116, email: 'jennie@blackpink.co.kr', avatarUrl: '/jennie.jfif', username: 'jennie' },
+]
 
 
 export default {
@@ -33,5 +41,8 @@ export default {
     if (!item) throw new Error('Not found')
     item.completed = !item.completed
     return null
+  },
+  getUsers: (): User[] => {
+    return users
   },
 }
