@@ -2,17 +2,18 @@
 
 ## Setting Up
 
-From the project folder, run:
+From the project folder, run using `yarn`:
 
 ```bash
-$ yarn
+$ yarn install
 $ yarn dev
 ```
 
-If you do not have `yarn`, we encourage you to install it:
+Using `npm`:
 
 ```bash
-$ npm install -g yarn
+$ npm install
+$ ./node_modules/.bin/concurrently 'npm run server-start' 'npm run client-start'
 ```
 
 Go to `http://localhost:3000` to see the client application.
@@ -22,11 +23,11 @@ Go to `http://localhost:3000` to see the client application.
 We'd like for you to create a **reusable** table component and replace the unordered list in `App.tsx` with the new table. Because we are not expecting you to handle styling, `Table.tsx` includes various imports that you may want to use. These components are for UI only and do not have functionality.
 
 Your table should (in order of importance):
-- have pagination
-- be able to filter
-- have sorting
+- have pagination, with the ability for a user to define the page size
+- be able to filter, with the ability for a developer to pass in comparator functions for each column
+- have sorting, both ascending and descending
 
-Note: It is not expected that you complete all three functions by the end of the exercise.
+Note: It is not expected that you complete all three functions by the end of the exercise. In fact, we encourage you to focus on quality, clean code, and readability more than the volume of work.
 
 ## Guidelines
 

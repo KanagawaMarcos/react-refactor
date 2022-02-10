@@ -28,9 +28,16 @@ function Users() {
           <Heading>Users</Heading>
         </Box>
       </Center>
-      <Center alignItems="baseline">
+
+      {/* <Center>
         <Box width="640px">
-          <pre>{JSON.stringify(users, null, 2)}</pre>
+          <Table />
+        </Box>
+      </Center> */}
+
+      <Center>
+        <Box width="640px">
+          {users.map(u => <img src={u.avatarUrl} key={u.id} />)}
         </Box>
       </Center>
     </>
