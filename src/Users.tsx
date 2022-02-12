@@ -1,7 +1,6 @@
 import {
   Box,
   Center,
-  Code,
   Heading,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -37,6 +36,9 @@ function Users() {
 
       <Center>
         <Box width="640px">
+          {/**
+           * TODO: render Users table with avatar, username, and number of followers
+          */}
           {users.map(u => <img src={u.avatarUrl} key={u.id} />)}
         </Box>
       </Center>

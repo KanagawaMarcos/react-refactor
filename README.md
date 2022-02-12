@@ -23,7 +23,8 @@ Go to `http://localhost:3000` to see the client application.
 We'd like for you to create a **reusable** table component and replace the unordered list in `App.tsx` with the new table. Because we are not expecting you to handle styling, `Table.tsx` includes various imports that you may want to use. These components are for UI only and do not have functionality.
 
 Your table should (in order of importance):
-- have pagination, with the ability for a user to define the page size
+- be able to render different kinds of data
+- have pagination, with the ability for a developer to define the page size
 - be able to filter, with the ability for a developer to pass in comparator functions for each column
 - have sorting, both ascending and descending
 
