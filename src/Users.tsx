@@ -1,7 +1,12 @@
 import {
   Box,
   Center,
+  Flex,
   Heading,
+  List,
+  ListItem,
+  Spacer,
+  Text,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
@@ -34,12 +39,48 @@ function Users() {
         </Box>
       </Center> */}
 
+      {/* TODO replace the following block with the <Table /> component you create */}
       <Center>
         <Box width="640px">
-          {/**
-           * TODO: render Users table with avatar, username, and number of followers
-          */}
-          {users.map(u => <img src={u.avatarUrl} key={u.id} />)}
+          <List>
+            <ListItem>
+              <Flex alignItems="center" color="gray.600" fontWeight={600}>
+                <Text
+                  fontSize={12}
+                  px={6}
+                  py={3}
+                  textTransform="uppercase"
+                  width={100}
+                >
+                  Image
+                </Text>
+                <Text fontSize={12} px={6} py={3} textTransform="uppercase">
+                  Name
+                </Text>
+                <Spacer />
+                <Text fontSize={12} px={6} py={3} textTransform="uppercase">
+                  Follow count
+                </Text>
+              </Flex>
+            </ListItem>
+            {users.map((item, index) => (
+              <ListItem key={item.id}>
+                <Flex
+                  alignItems="center"
+                  bg={index % 2 === 0 ? "gray.100" : "white"}
+                >
+                  <img src={item.avatarUrl} />
+                  <Text fontSize={16} px={6} py={4}>
+                    {item.username}
+                  </Text>
+                  <Spacer />
+                  <Text fontSize={16} px={6} py={4}>
+                    {item.followers.length}
+                  </Text>
+                </Flex>
+              </ListItem>
+            ))}
+          </List>
         </Box>
       </Center>
     </>

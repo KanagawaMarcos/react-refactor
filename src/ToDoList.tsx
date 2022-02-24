@@ -88,6 +88,13 @@ function ToDoList() {
         </Box>
       </Center>
 
+      {/* <Center>
+        <Box width="640px">
+          <Table />
+        </Box>
+      </Center> */}
+      
+      {/* TODO replace the following block with the <Table /> component you create */}
       <Center alignItems="baseline">
         <Box width="640px">
           <List>
@@ -147,12 +154,6 @@ function ToDoList() {
           </List>
         </Box>
       </Center>
-
-      {/* <Center>
-        <Box width="640px">
-          <Table />
-        </Box>
-      </Center> */}
 
       <Center>
         <Box p={4} width="640px" bg="gray.50">
