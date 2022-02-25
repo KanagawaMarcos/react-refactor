@@ -38,4 +38,5 @@ Note: It is not expected that you complete all three functions by the end of the
 
 ## Submitting
 - Please create a branch off of the `main` branch called `solution-{your-last-name}`.
-- When you're done, create a pull request with your branch pointing to `main`.
+- Make sure you commit your changes as if you would be submitting a pull request.
+- Zip the directory and email it to [recruiting@sisudata.com](mailto:recruiting@sisudata.com?subject=Contractor%20project%20submission%20from%20{FIRST_NAME}%20{LAST_NAME})
