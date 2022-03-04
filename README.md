@@ -4,10 +4,12 @@
 Data-intensive applications often need UI components that can render records from a database in a table. We'd like for you to create a **reusable** table component and replace the unordered list in `App.tsx` with the new table. Because we are not expecting you to handle styling, `Table.tsx` includes various imports that you may want to use. These components are for UI only and do not have functionality.
 
 Your table should (in order of importance):
-1. be able to render different kinds of data
+1. be able to render different kinds of data<sup>1</sup>
 2. have pagination, with the ability for a developer to define the page size
 3. be able to filter based on text only
 4. have sorting, both ascending and descending, with the ability for a developer to pass in comparator functions for _each column_
+
+><sup>1</sup> you'll find two models, in the `Users.tsx` and `TodoList.tsx` components. They should both be able to use the reusable `Table` you write to render their respective columns and data, and maintain their current functionalities.
 
 **Timebox this assignment to two hours**. It is not expected that you complete all three functions by the end of the exercise. In fact, we encourage you to focus on quality, clean code, and readability more than the volume of work.
 ## Setting Up
@@ -35,7 +37,7 @@ Go to `http://localhost:3000` to see the client application.
 - An additional model `User` is included. While you do not have to create the table for this, it is provided to give extra context into what we'd like for the `Table` component to do.
 
 ## Submitting
-- Please create a branch off of the `main` branch called `solution-{your-last-name}`.
-- Make sure you commit your changes as if you would be submitting a pull request.
-- Zip the directory and email it to [recruiting@sisudata.com](mailto:recruiting@sisudata.com?subject=Contractor%20project%20submission%20from%20{FIRST_NAME}%20{LAST_NAME})
+- Fork this repo into your own Github account.
+- Create a branch and then open a pull request to `main` on the forked repo.
+- Email a link to the PR to [recruiting@sisudata.com](mailto:recruiting@sisudata.com?subject=Contractor%20project%20submission%20from%20{FIRST_NAME}%20{LAST_NAME})
 
