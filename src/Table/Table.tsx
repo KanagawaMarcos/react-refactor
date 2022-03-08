@@ -58,7 +58,7 @@ export const Table : React.FunctionComponent<ITableProps<User>> = React.memo((pr
   const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     setIsSearching(true)
-    setSearchResult(props.users.filter(u => u?.username.includes(e.target.value)))
+    setSearchResult(props.users.filter(u => u?.username.includes(e.target.value) || u?.email.includes(e.target.value)))
     if(e.target.value === '' || e.target.value === ' '){
       setIsSearching(false)
     }
