@@ -13,6 +13,7 @@ import {
   NumberInputField,
   Input,
   InputGroup,
+  Image,
   InputLeftElement,
 } from "@chakra-ui/react";
 
@@ -67,7 +68,7 @@ export const Table : React.FunctionComponent<ITableProps> = React.memo((props : 
     return users.slice(indexFirst, indexLast).map((user,index)=>{
       return(
         <Tr key={index}>
-          <Td key={`user-${user.id}-photo`}></Td>
+          <Td key={`user-${user.id}-photo`}><Image src={user.avatarUrl} /></Td>
           <Td key={`user-${user.id}-username`}>{user.username}</Td>
           <Td key={`user-${user.id}-email`}>{user.email}</Td>
           <Td key={`user-${user.id}-followers`}>{user.followers.length}</Td>
