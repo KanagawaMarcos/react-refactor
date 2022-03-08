@@ -31,11 +31,23 @@ export const Table : React.FunctionComponent<ITableProps> = React.memo((props : 
     setUsers(props.users)
     setUsersPerPage(props.usersPerPage)
   }, [props.users])
-
+  // Pagination Logic
   const indexLast = currentPage * usersPerPage;
   const indexFirst = indexLast - usersPerPage;
   const currentPageOfUsers = users.slice(indexFirst, indexLast);
 
+  const nextPage = () => {
+    if(currentPage*usersPerPage < users.length){
+      setCurrentPage(currentPage+1)
+    }
+  }
+
+  const previousPage = () =>{
+    if(currentPage > 1){
+      setCurrentPage(currentPage-1)
+    }
+  }
+  
   return (
     <CTable variant="striped">
       <Thead>
@@ -71,14 +83,16 @@ export const Table : React.FunctionComponent<ITableProps> = React.memo((props : 
           <Td colSpan={1}>
             <Flex justifyContent="center" alignItems="center" style={{ gap: '0.25rem' }}>
               <IconButton
+                onClick={previousPage}
                 aria-label="previous-page"
                 size="sm"
                 icon={<ArrowLeftIcon />}
               />
-              <NumberInput step={1} defaultValue={1} min={1} max={100}>
-                <NumberInputField />
+              <NumberInput step={1} value={currentPage} defaultValue={currentPage} min={1} max={100}>
+                <NumberInputField/>
               </NumberInput>
               <IconButton
+                onClick={nextPage}
                 aria-label="next-page"
                 size="sm"
                 icon={<ArrowRightIcon />}
