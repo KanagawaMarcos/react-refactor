@@ -59,7 +59,8 @@ export const Table : React.FunctionComponent<ITableProps<User>> = React.memo((pr
     e.preventDefault()
     setIsSearching(true)
     // If you want to change the coloumns being searched on, this is the line to look at. ;)
-    setSearchResult(props.users.filter(u => u?.username.includes(e.target.value) || u?.email.includes(e.target.value)))
+    //setSearchResult(props.users.filter(u => u?.username.includes(e.target.value) || u?.email.includes(e.target.value))) // username + email
+    setSearchResult(props.users.filter(u => u?.username.includes(e.target.value)))
     if(e.target.value === '' || e.target.value === ' '){
       setIsSearching(false)
     }
