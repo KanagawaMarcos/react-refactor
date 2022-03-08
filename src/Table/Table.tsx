@@ -30,6 +30,7 @@ export const Table : React.FunctionComponent<ITableProps> = React.memo((props : 
   const indexLast = currentPage * usersPerPage;
   const indexFirst = indexLast - usersPerPage;
   
+  // Search
   const [isSearching, setIsSearching] = React.useState<Boolean>(false)
   const [searchResult, setSearchResult] = React.useState<User[]>([])
 
@@ -39,8 +40,7 @@ export const Table : React.FunctionComponent<ITableProps> = React.memo((props : 
   }, [props.users])
   
   
-  // Search
-
+  // Pagination
   const nextPage = () => {
     if(currentPage*usersPerPage < users.length){
       setCurrentPage(currentPage+1)
