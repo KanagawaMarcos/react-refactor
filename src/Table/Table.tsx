@@ -22,7 +22,7 @@ import ITableProps from "../types/Table";
 
 import React from "react";
 
-export const Table : React.FunctionComponent<ITableProps> = React.memo((props : ITableProps) => {
+export const Table : React.FunctionComponent<ITableProps<User>> = React.memo((props : ITableProps<User>) => {
   const [users, setUsers] = React.useState<User[]>([])
   // Pagination
   const [usersPerPage, setUsersPerPage] = React.useState<number>(10)
@@ -65,7 +65,7 @@ export const Table : React.FunctionComponent<ITableProps> = React.memo((props : 
   }
 
   const renderPage = (users: User[]) =>{
-    return users.slice(indexFirst, indexLast).map((user,index)=>{
+    return users.sort(props.sortLambda).slice(indexFirst, indexLast).map((user,index)=>{
       return(
         <Tr key={index}>
           <Td key={`user-${user.id}-photo`}><Image src={user.avatarUrl} /></Td>

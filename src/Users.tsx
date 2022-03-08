@@ -37,7 +37,7 @@ function Users() {
 
       <Center>
         <Box width="640px">
-          <Table users={users} usersPerPage={2} /> 
+          <Table users={users} usersPerPage={2} sortLambda={(a, b) => (a > b ? -1 : 1)} />
         </Box>
       </Center>
 
