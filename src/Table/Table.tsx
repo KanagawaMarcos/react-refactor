@@ -59,12 +59,11 @@ export const Table : React.FunctionComponent<ITableProps> = React.memo((props : 
     e.preventDefault()
     setIsSearching(true)
     setSearchResult(props.users.filter(u => u?.username.includes(e.target.value)))
-    console.log(e.target.value)
     if(e.target.value === '' || e.target.value === ' '){
       setIsSearching(false)
     }
-    console.log(searchResult)
   }
+
   const renderPage = (users: User[]) =>{
     return users.map((user,index)=>{
       return(
@@ -76,6 +75,7 @@ export const Table : React.FunctionComponent<ITableProps> = React.memo((props : 
         </Tr>)
     })
   }
+  
   return (
     <CTable variant="striped">
       <Thead>
