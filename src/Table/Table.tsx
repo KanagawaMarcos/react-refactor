@@ -36,9 +36,9 @@ export const Table : React.FunctionComponent<ITableProps<User>> = React.memo((pr
   const [searchResult, setSearchResult] = React.useState<User[]>([])
 
   React.useEffect(()=>{
-    setUsers(props.users)
-    setUsersPerPage(props.usersPerPage)
-  }, [props.users])
+    setUsers(props?.users)
+    setUsersPerPage(props?.usersPerPage)
+  }, [props?.users])
   
   
   // Pagination
@@ -68,10 +68,10 @@ export const Table : React.FunctionComponent<ITableProps<User>> = React.memo((pr
     return users.sort(props.sortLambda).slice(indexFirst, indexLast).map((user,index)=>{
       return(
         <Tr key={index}>
-          <Td key={`user-${user.id}-photo`}><Image src={user.avatarUrl} /></Td>
-          <Td key={`user-${user.id}-username`}>{user.username}</Td>
-          <Td key={`user-${user.id}-email`}>{user.email}</Td>
-          <Td key={`user-${user.id}-followers`}>{user.followers.length}</Td>
+          <Td key={`user-${user.id}-photo`}><Image src={user?.avatarUrl} /></Td>
+          <Td key={`user-${user.id}-username`}>{user?.username}</Td>
+          <Td key={`user-${user.id}-email`}>{user?.email}</Td>
+          <Td key={`user-${user.id}-followers`}>{user?.followers?.length}</Td>
         </Tr>)
     })
   }
