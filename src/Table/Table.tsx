@@ -23,15 +23,19 @@ import React from "react";
 
 export const Table : React.FunctionComponent<ITableProps> = React.memo((props : ITableProps) => {
   const [users, setUsers] = React.useState<User[]>([])
+  // Pagination
   const [usersPerPage, setUsersPerPage] = React.useState<number>(10)
   const [currentPage, setCurrentPage] = React.useState<number>(1)
+  // Search
+  const [input, setInput] = React.useState<string>('')
 
+  
   React.useEffect(()=>{
-    console.log(props.users)
     setUsers(props.users)
     setUsersPerPage(props.usersPerPage)
   }, [props.users])
-  // Pagination Logic
+  
+  // Pagination
   const indexLast = currentPage * usersPerPage;
   const indexFirst = indexLast - usersPerPage;
   const currentPageOfUsers = users.slice(indexFirst, indexLast);
@@ -47,7 +51,15 @@ export const Table : React.FunctionComponent<ITableProps> = React.memo((props : 
       setCurrentPage(currentPage-1)
     }
   }
-  
+
+  // Search
+  const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    const searchResult = currentPageOfUsers.filter( u => u?.username.includes(e.target.value))
+    console.log(e.target.value)
+    console.log(searchResult)
+  }
+
   return (
     <CTable variant="striped">
       <Thead>
@@ -76,7 +88,7 @@ export const Table : React.FunctionComponent<ITableProps> = React.memo((props : 
             <Flex justifyContent="center">
               <InputGroup>
                 <InputLeftElement pointerEvents="none"><SearchIcon /></InputLeftElement>
-                <Input placeholder="Search" />
+                <Input placeholder="Search" onChange={onSearchChange}/>
               </InputGroup>
             </Flex>
           </Td>
