@@ -29,7 +29,6 @@ export const Table : React.FunctionComponent<ITableProps> = React.memo((props : 
   
   const indexLast = currentPage * usersPerPage;
   const indexFirst = indexLast - usersPerPage;
-  const currentPageOfUsersPaginated = users.slice(indexFirst, indexLast);
   
   const [isSearching, setIsSearching] = React.useState<Boolean>(false)
   const [searchResult, setSearchResult] = React.useState<User[]>([])
@@ -65,7 +64,7 @@ export const Table : React.FunctionComponent<ITableProps> = React.memo((props : 
   }
 
   const renderPage = (users: User[]) =>{
-    return users.map((user,index)=>{
+    return users.slice(indexFirst, indexLast).map((user,index)=>{
       return(
         <Tr key={index}>
           <Td key={`user-${user.id}-photo`}></Td>
@@ -75,7 +74,7 @@ export const Table : React.FunctionComponent<ITableProps> = React.memo((props : 
         </Tr>)
     })
   }
-  
+
   return (
     <CTable variant="striped">
       <Thead>
@@ -87,7 +86,7 @@ export const Table : React.FunctionComponent<ITableProps> = React.memo((props : 
         </Tr>
       </Thead>
       <Tbody>
-      {!isSearching && renderPage(currentPageOfUsersPaginated)}
+      {!isSearching && renderPage(users)}
       {isSearching && renderPage(searchResult)}
       </Tbody>
       <Tfoot>
