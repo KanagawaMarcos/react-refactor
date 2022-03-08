@@ -25,7 +25,7 @@ function Users() {
       if (data) setUsers(data);
     }
     getUsers();
-  });
+  },[]);
 
   return (
     <>
@@ -35,13 +35,12 @@ function Users() {
         </Box>
       </Center>
 
-      {/* <Center>
+      <Center>
         <Box width="640px">
-          <Table />
+          <Table users={users} usersPerPage={2} /> 
         </Box>
-      </Center> */}
+      </Center>
 
-      {/* TODO replace the following block with the <Table /> component you create */}
       <Center>
         <Box width="640px">
           <List>
