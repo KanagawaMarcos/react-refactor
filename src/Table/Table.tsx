@@ -21,7 +21,7 @@ import { User } from "../types/User";
 import ITableProps from "../types/Table";
 
 import React from "react";
-
+// @TODO: replace User type with any type therefore, using Object.keys to loop throught fields and build the columns and pass the generic down as dynamic to typescript
 export const Table : React.FunctionComponent<ITableProps<User>> = React.memo((props : ITableProps<User>) => {
   const [users, setUsers] = React.useState<User[]>([])
   // Pagination
@@ -58,6 +58,7 @@ export const Table : React.FunctionComponent<ITableProps<User>> = React.memo((pr
   const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     setIsSearching(true)
+    // If you want to change the coloumns being searched on, this is the line to look at. ;)
     setSearchResult(props.users.filter(u => u?.username.includes(e.target.value) || u?.email.includes(e.target.value)))
     if(e.target.value === '' || e.target.value === ' '){
       setIsSearching(false)
