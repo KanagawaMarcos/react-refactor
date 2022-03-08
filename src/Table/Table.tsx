@@ -26,19 +26,21 @@ export const Table : React.FunctionComponent<ITableProps> = React.memo((props : 
   // Pagination
   const [usersPerPage, setUsersPerPage] = React.useState<number>(10)
   const [currentPage, setCurrentPage] = React.useState<number>(1)
-  // Search
-  const [input, setInput] = React.useState<string>('')
-
   
+  const indexLast = currentPage * usersPerPage;
+  const indexFirst = indexLast - usersPerPage;
+  const currentPageOfUsersPaginated = users.slice(indexFirst, indexLast);
+  
+  const [isSearching, setIsSearching] = React.useState<Boolean>(false)
+  const [searchResult, setSearchResult] = React.useState<User[]>([])
+
   React.useEffect(()=>{
     setUsers(props.users)
     setUsersPerPage(props.usersPerPage)
   }, [props.users])
   
-  // Pagination
-  const indexLast = currentPage * usersPerPage;
-  const indexFirst = indexLast - usersPerPage;
-  const currentPageOfUsers = users.slice(indexFirst, indexLast);
+  
+  // Search
 
   const nextPage = () => {
     if(currentPage*usersPerPage < users.length){
@@ -55,11 +57,25 @@ export const Table : React.FunctionComponent<ITableProps> = React.memo((props : 
   // Search
   const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
-    const searchResult = currentPageOfUsers.filter( u => u?.username.includes(e.target.value))
+    setIsSearching(true)
+    setSearchResult(props.users.filter(u => u?.username.includes(e.target.value)))
     console.log(e.target.value)
+    if(e.target.value === '' || e.target.value === ' '){
+      setIsSearching(false)
+    }
     console.log(searchResult)
   }
-
+  const renderPage = (users: User[]) =>{
+    return users.map((user,index)=>{
+      return(
+        <Tr key={index}>
+          <Td key={`user-${user.id}-photo`}></Td>
+          <Td key={`user-${user.id}-username`}>{user.username}</Td>
+          <Td key={`user-${user.id}-email`}>{user.email}</Td>
+          <Td key={`user-${user.id}-followers`}>{user.followers.length}</Td>
+        </Tr>)
+    })
+  }
   return (
     <CTable variant="striped">
       <Thead>
@@ -71,16 +87,8 @@ export const Table : React.FunctionComponent<ITableProps> = React.memo((props : 
         </Tr>
       </Thead>
       <Tbody>
-      {currentPageOfUsers.map((user,index)=>{
-        console.log(currentPageOfUsers.length)
-        return(
-          <Tr key={index}>
-            <Td key={`user-${user.id}-photo`}></Td>
-            <Td key={`user-${user.id}-username`}>{user.username}</Td>
-            <Td key={`user-${user.id}-email`}>{user.email}</Td>
-            <Td key={`user-${user.id}-followers`}>{user.followers.length}</Td>
-          </Tr>)
-      })}
+      {!isSearching && renderPage(currentPageOfUsersPaginated)}
+      {isSearching && renderPage(searchResult)}
       </Tbody>
       <Tfoot>
         <Tr>
